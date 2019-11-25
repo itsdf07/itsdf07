@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itsdf07.mapper.PingResultEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.itsdf07.entity.PingResultEntity" >
-    <id column="pr_id" property="prId" jdbcType="INTEGER" />
-    <result column="pr_iccid" property="prIccid" jdbcType="VARCHAR" />
-    <result column="pr_imei" property="prImei" jdbcType="VARCHAR" />
-    <result column="pr_provider" property="prProvider" jdbcType="VARCHAR" />
-    <result column="pr_os" property="prOs" jdbcType="VARCHAR" />
-    <result column="pr_net" property="prNet" jdbcType="VARCHAR" />
-    <result column="pr_host" property="prHost" jdbcType="VARCHAR" />
-    <result column="pr_next_host" property="prNextHost" jdbcType="VARCHAR" />
-    <result column="pr_ip" property="prIp" jdbcType="VARCHAR" />
-    <result column="pr_create_date" property="prCreateDate" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.itsdf07.mapper.PingResultEntityMapper">
+    <resultMap id="BaseResultMap" type="com.itsdf07.entity.PingResultEntity">
+        <id column="pr_id" property="prId" jdbcType="INTEGER"/>
+        <result column="pr_iccid" property="prIccid" jdbcType="VARCHAR"/>
+        <result column="pr_imei" property="prImei" jdbcType="VARCHAR"/>
+        <result column="pr_provider" property="prProvider" jdbcType="VARCHAR"/>
+        <result column="pr_os" property="prOs" jdbcType="VARCHAR"/>
+        <result column="pr_net" property="prNet" jdbcType="VARCHAR"/>
+        <result column="pr_host" property="prHost" jdbcType="VARCHAR"/>
+        <result column="pr_next_host" property="prNextHost" jdbcType="VARCHAR"/>
+        <result column="pr_ip" property="prIp" jdbcType="VARCHAR"/>
+        <result column="pr_create_date" property="prCreateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     pr_id, pr_iccid, pr_imei, pr_provider, pr_os, pr_net, pr_host, pr_next_host, pr_ip, 
     pr_create_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_ping_result
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    <select id="selectByHost" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from t_ping_result
+        where pr_host = #{host,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ping_result
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_ping_result
     where pr_id = #{prId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.itsdf07.entity.PingResultEntity" >
+    <insert id="insert" parameterType="com.itsdf07.entity.PingResultEntity">
     insert into t_ping_result (pr_id, pr_iccid, pr_imei, 
       pr_provider, pr_os, pr_net, 
       pr_host, pr_next_host, pr_ip, 
@@ -37,107 +44,107 @@
       #{prHost,jdbcType=VARCHAR}, #{prNextHost,jdbcType=VARCHAR}, #{prIp,jdbcType=VARCHAR}, 
       #{prCreateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.itsdf07.entity.PingResultEntity" >
-    insert into t_ping_result
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="prId != null" >
-        pr_id,
-      </if>
-      <if test="prIccid != null" >
-        pr_iccid,
-      </if>
-      <if test="prImei != null" >
-        pr_imei,
-      </if>
-      <if test="prProvider != null" >
-        pr_provider,
-      </if>
-      <if test="prOs != null" >
-        pr_os,
-      </if>
-      <if test="prNet != null" >
-        pr_net,
-      </if>
-      <if test="prHost != null" >
-        pr_host,
-      </if>
-      <if test="prNextHost != null" >
-        pr_next_host,
-      </if>
-      <if test="prIp != null" >
-        pr_ip,
-      </if>
-      <if test="prCreateDate != null" >
-        pr_create_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="prId != null" >
-        #{prId,jdbcType=INTEGER},
-      </if>
-      <if test="prIccid != null" >
-        #{prIccid,jdbcType=VARCHAR},
-      </if>
-      <if test="prImei != null" >
-        #{prImei,jdbcType=VARCHAR},
-      </if>
-      <if test="prProvider != null" >
-        #{prProvider,jdbcType=VARCHAR},
-      </if>
-      <if test="prOs != null" >
-        #{prOs,jdbcType=VARCHAR},
-      </if>
-      <if test="prNet != null" >
-        #{prNet,jdbcType=VARCHAR},
-      </if>
-      <if test="prHost != null" >
-        #{prHost,jdbcType=VARCHAR},
-      </if>
-      <if test="prNextHost != null" >
-        #{prNextHost,jdbcType=VARCHAR},
-      </if>
-      <if test="prIp != null" >
-        #{prIp,jdbcType=VARCHAR},
-      </if>
-      <if test="prCreateDate != null" >
-        #{prCreateDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itsdf07.entity.PingResultEntity" >
-    update t_ping_result
-    <set >
-      <if test="prIccid != null" >
-        pr_iccid = #{prIccid,jdbcType=VARCHAR},
-      </if>
-      <if test="prImei != null" >
-        pr_imei = #{prImei,jdbcType=VARCHAR},
-      </if>
-      <if test="prProvider != null" >
-        pr_provider = #{prProvider,jdbcType=VARCHAR},
-      </if>
-      <if test="prOs != null" >
-        pr_os = #{prOs,jdbcType=VARCHAR},
-      </if>
-      <if test="prNet != null" >
-        pr_net = #{prNet,jdbcType=VARCHAR},
-      </if>
-      <if test="prHost != null" >
-        pr_host = #{prHost,jdbcType=VARCHAR},
-      </if>
-      <if test="prNextHost != null" >
-        pr_next_host = #{prNextHost,jdbcType=VARCHAR},
-      </if>
-      <if test="prIp != null" >
-        pr_ip = #{prIp,jdbcType=VARCHAR},
-      </if>
-      <if test="prCreateDate != null" >
-        pr_create_date = #{prCreateDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.itsdf07.entity.PingResultEntity" >
+    <insert id="insertSelective" parameterType="com.itsdf07.entity.PingResultEntity">
+        insert into t_ping_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prId != null">
+                pr_id,
+            </if>
+            <if test="prIccid != null">
+                pr_iccid,
+            </if>
+            <if test="prImei != null">
+                pr_imei,
+            </if>
+            <if test="prProvider != null">
+                pr_provider,
+            </if>
+            <if test="prOs != null">
+                pr_os,
+            </if>
+            <if test="prNet != null">
+                pr_net,
+            </if>
+            <if test="prHost != null">
+                pr_host,
+            </if>
+            <if test="prNextHost != null">
+                pr_next_host,
+            </if>
+            <if test="prIp != null">
+                pr_ip,
+            </if>
+            <if test="prCreateDate != null">
+                pr_create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prId != null">
+                #{prId,jdbcType=INTEGER},
+            </if>
+            <if test="prIccid != null">
+                #{prIccid,jdbcType=VARCHAR},
+            </if>
+            <if test="prImei != null">
+                #{prImei,jdbcType=VARCHAR},
+            </if>
+            <if test="prProvider != null">
+                #{prProvider,jdbcType=VARCHAR},
+            </if>
+            <if test="prOs != null">
+                #{prOs,jdbcType=VARCHAR},
+            </if>
+            <if test="prNet != null">
+                #{prNet,jdbcType=VARCHAR},
+            </if>
+            <if test="prHost != null">
+                #{prHost,jdbcType=VARCHAR},
+            </if>
+            <if test="prNextHost != null">
+                #{prNextHost,jdbcType=VARCHAR},
+            </if>
+            <if test="prIp != null">
+                #{prIp,jdbcType=VARCHAR},
+            </if>
+            <if test="prCreateDate != null">
+                #{prCreateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.itsdf07.entity.PingResultEntity">
+        update t_ping_result
+        <set>
+            <if test="prIccid != null">
+                pr_iccid = #{prIccid,jdbcType=VARCHAR},
+            </if>
+            <if test="prImei != null">
+                pr_imei = #{prImei,jdbcType=VARCHAR},
+            </if>
+            <if test="prProvider != null">
+                pr_provider = #{prProvider,jdbcType=VARCHAR},
+            </if>
+            <if test="prOs != null">
+                pr_os = #{prOs,jdbcType=VARCHAR},
+            </if>
+            <if test="prNet != null">
+                pr_net = #{prNet,jdbcType=VARCHAR},
+            </if>
+            <if test="prHost != null">
+                pr_host = #{prHost,jdbcType=VARCHAR},
+            </if>
+            <if test="prNextHost != null">
+                pr_next_host = #{prNextHost,jdbcType=VARCHAR},
+            </if>
+            <if test="prIp != null">
+                pr_ip = #{prIp,jdbcType=VARCHAR},
+            </if>
+            <if test="prCreateDate != null">
+                pr_create_date = #{prCreateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.itsdf07.entity.PingResultEntity">
     update t_ping_result
     set pr_iccid = #{prIccid,jdbcType=VARCHAR},
       pr_imei = #{prImei,jdbcType=VARCHAR},
