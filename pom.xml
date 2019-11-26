@@ -62,7 +62,7 @@
             <version>1.2.59</version>
         </dependency>
 
-        <!--swagger restful api支持-->
+        <!--Swagger2 api接口插件-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>

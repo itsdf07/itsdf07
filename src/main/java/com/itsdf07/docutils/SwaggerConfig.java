@@ -12,8 +12,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration
-@EnableSwagger2
+/**
+ * @Description: Swagger配置类
+ * @Auther: itsdf07
+ * @Date: 2019/11/22 17:46
+ **/
+@Configuration //标记配置类
+@EnableSwagger2 //开启在线接口文档
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
@@ -31,7 +36,7 @@ public class SwaggerConfig {
                 .description("itsdf07系统对外开放接口文档")
                 .termsOfServiceUrl("https://github.com")
                 .contact(new Contact("itsdf07", "com.itsdf07", "923255742@qq,com"))
-                .version("1.0.0")
+                .version("版本号:1.0")
                 .build();
     }
 }
