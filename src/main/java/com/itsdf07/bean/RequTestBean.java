@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Auther: itsdf07
  * @Date: 2019/11/26 11:31
  **/
-@ApiModel
+@ApiModel(value = "对Client端请求的接收类")
 public class RequTestBean {
     @ApiModelProperty(name = "username", value = "itsdf07", notes = "本次处理信息", dataType = "String", required = true)
     private String username;

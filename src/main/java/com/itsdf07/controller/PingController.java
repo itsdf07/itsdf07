@@ -21,14 +21,20 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping(value = "/ping")
-@Api(description = "Ping相关业务操作")
+@Api(tags = "Ping相关业务操作")
 public class PingController {
     @Autowired
     private PingService pingService;
 
-    @ApiOperation(value = "获取ping的目标主机", httpMethod = "POST", notes = "接口发布说明")
+    @ApiOperation(
+            value = "获取ping的目标主机API接口",
+            httpMethod = "POST", protocols = "HTTP", produces = "application/json", response = String.class,
+            notes = "Rquest：{\"group\":\"group\"}<br>" +
+                    "Response：{\"code\":200,\"datas\":[{\"addresses\":[{\"prCreateDate\":1574666635000,\"prHost\":\"tts.baidu.com\",\"prIccid\":\"5288412\",\"prId\":1,\"prImei\":\"123456\",\"prIp\":\"115.239.211.61\",\"prNet\":\"4G\",\"prNextHost\":\"tts.n.shifen.com\",\"prOs\":\"8.0\",\"prProvider\":\"Android\"}],\"createTime\":1574411524000,\"group\":\"TTS\",\"host\":\"tts.baidu.com\"},{\"addresses\":[],\"createTime\":1574411524000,\"group\":\"TTS\",\"host\":\"tsn.baidu.com\"}],\"desc\":\"success\"}")
     @PostMapping(value = "/hosts")
-    public String getPingHost(@RequestBody JSONObject group2Json) {
+    public String getPingHost(
+            @ApiParam(name = "body", value = "Client端Json请求串", required = true)
+            @RequestBody JSONObject group2Json) {
         String group = group2Json.get("group").toString();
         System.out.println("Ping目标主机下发接口:group=" + group);
         if ("".equals(group)) {
@@ -46,7 +52,6 @@ public class PingController {
         respHostsBean.setDesc("success");
         respHostsBean.setCode(200);
         respHostsBean.setDatas(hosts);
-        //{"code":200,"datas":[{"addresses":[{"prCreateDate":1574666635000,"prHost":"tts.baidu.com","prIccid":"5288412","prId":1,"prImei":"123456","prIp":"115.239.211.61","prNet":"4G","prNextHost":"tts.n.shifen.com","prOs":"8.0","prProvider":"Android"}],"createTime":1574411524000,"group":"TTS","host":"tts.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"tsn.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"vse.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"vop.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"openapi.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"yuyin.baidu.com"},{"addresses":[],"createTime":1574411524000,"group":"TTS","host":"yun.baidu.com"}],"desc":"success"}
         return JSONObject.toJSONString(respHostsBean);
     }
 }
