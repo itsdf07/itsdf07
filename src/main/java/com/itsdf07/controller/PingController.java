@@ -2,9 +2,12 @@ package com.itsdf07.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.itsdf07.bean.BaseRespBean;
 import com.itsdf07.bean.PingHostBean;
+import com.itsdf07.bean.RequAddPingResultBean;
 import com.itsdf07.bean.RespHostsBean;
 import com.itsdf07.entity.PingHostEntity;
+import com.itsdf07.entity.PingResultEntity;
 import com.itsdf07.service.PingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +15,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,5 +58,44 @@ public class PingController {
         respHostsBean.setCode(200);
         respHostsBean.setDatas(hosts);
         return JSONObject.toJSONString(respHostsBean);
+    }
+
+
+    @ApiOperation(
+            value = "新增新ping出来的IP或者中转域名的API接口",
+            httpMethod = "POST", protocols = "HTTP", produces = "application/json", response = String.class,
+            notes = "Rquest：{\"group\":\"group\"}<br>" +
+                    "Response：{\"datas\":[{\"iccid\":\"8986061910003732056H\",\"imei\":\"860588043009813\",\"provider\":\"Android\",\"os\":\"8.0\",\"netType\":\"4G\",\"host\":\"tts.baidu.com\",\"nextHost\":\"tts.n.shifen.com\",\"ip\":\"115.239.211.61\"}]}")
+    @PostMapping(value = "/addPingReuslt")
+    public String addPingResult(
+            @ApiParam(name = "body", value = "Client端Json请求串", required = true)
+            @RequestBody RequAddPingResultBean requAddPingResultBean) {
+        System.out.println("需要新增的IP信息:datas=" + requAddPingResultBean.toString());
+        List<PingResultEntity> pingResultEntities = new ArrayList<>();
+        Date createTime = new Date();
+        for (RequAddPingResultBean.DatasBean bean :
+                requAddPingResultBean.getDatas()) {
+            if (bean == null) {
+                continue;
+            }
+            PingResultEntity pingResultEntity = new PingResultEntity();
+            pingResultEntity.setPrIccid(bean.getIccid());
+            pingResultEntity.setPrImei(bean.getImei());
+            pingResultEntity.setPrProvider(bean.getProvider());
+            pingResultEntity.setPrOs(bean.getOs());
+            pingResultEntity.setPrNet(bean.getNetType());
+            pingResultEntity.setPrHost(bean.getHost());
+            pingResultEntity.setPrNextHost(bean.getNextHost());
+            pingResultEntity.setPrIp(bean.getIp());
+            pingResultEntity.setPrCreateDate(createTime);
+            pingResultEntities.add(pingResultEntity);
+        }
+        //TODO 待优化：如果已经存在，则相同数据不重复插入
+        int cnt = pingService.insertBatch2PingResults(pingResultEntities);
+        System.out.println("插入数量:cnt=" + cnt);
+        BaseRespBean baseRespBean = new BaseRespBean();
+        baseRespBean.setCode(200);
+        baseRespBean.setDesc("成功新增了" + cnt + "数据");
+        return JSONObject.toJSONString(baseRespBean);
     }
 }

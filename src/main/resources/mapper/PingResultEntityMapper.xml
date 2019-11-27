@@ -24,6 +24,29 @@
         from t_ping_result
         where pr_host = #{host,jdbcType=INTEGER}
     </select>
+
+    <insert id="insertBatch">
+        insert into t_ping_result (pr_id, pr_iccid, pr_imei,
+        pr_provider, pr_os, pr_net,
+        pr_host, pr_next_host, pr_ip,
+        pr_create_date)
+        values
+        <foreach collection="pingResults" item="pingResult" separator=",">
+            (#{pingResult.prId,jdbcType=INTEGER},
+            #{pingResult.prIccid,jdbcType=VARCHAR},
+            #{pingResult.prImei,jdbcType=VARCHAR},
+            #{pingResult.prProvider,jdbcType=VARCHAR},
+            #{pingResult.prOs,jdbcType=VARCHAR},
+            #{pingResult.prNet,jdbcType=VARCHAR},
+            #{pingResult.prHost,jdbcType=VARCHAR},
+            #{pingResult.prNextHost,jdbcType=VARCHAR},
+            #{pingResult.prIp,jdbcType=VARCHAR},
+            #{pingResult.prCreateDate,jdbcType=TIMESTAMP})
+        </foreach>
+
+    </insert>
+
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -34,6 +57,8 @@
     delete from t_ping_result
     where pr_id = #{prId,jdbcType=INTEGER}
   </delete>
+
+
     <insert id="insert" parameterType="com.itsdf07.entity.PingResultEntity">
     insert into t_ping_result (pr_id, pr_iccid, pr_imei, 
       pr_provider, pr_os, pr_net, 

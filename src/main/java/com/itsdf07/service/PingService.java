@@ -2,6 +2,7 @@ package com.itsdf07.service;
 
 import com.itsdf07.bean.PingHostBean;
 import com.itsdf07.entity.PingHostEntity;
+import com.itsdf07.entity.PingResultEntity;
 import com.itsdf07.mapper.PingHostEntityMapper;
 import com.itsdf07.mapper.PingResultEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class PingService {
 
     public List<PingHostBean> getHostsByGroup(String group) {
         return pingHostEntityMapper.selectByGroup(group);
+    }
+
+    public int insertBatch2PingResults(List<PingResultEntity> pingResults) {
+        return pingResultEntityMapper.insertBatch(pingResults);
     }
 
 }
