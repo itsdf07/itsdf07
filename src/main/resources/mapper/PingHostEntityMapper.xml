@@ -26,7 +26,6 @@
         select
         *
         from t_ping_host
-        LEFT JOIN t_ping_result ON t_ping_host.ph_host = t_ping_result.pr_host
         <where>
             <if test="ph_group!=null">
                 ph_group = #{phHost,jdbcType=VARCHAR}
