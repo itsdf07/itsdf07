@@ -9,11 +9,13 @@ public class PingResultEntity {
 
     private String prImei;
 
-    private String prProvider;
+    private Integer prOs;
 
-    private String prOs;
+    private String prOsVersion;
 
-    private String prNet;
+    private Integer prProvider;
+
+    private Integer prNetType;
 
     private String prHost;
 
@@ -36,7 +38,7 @@ public class PingResultEntity {
     }
 
     public void setPrIccid(String prIccid) {
-        this.prIccid = prIccid == null ? null : prIccid.trim();
+        this.prIccid = prIccid;
     }
 
     public String getPrImei() {
@@ -44,31 +46,39 @@ public class PingResultEntity {
     }
 
     public void setPrImei(String prImei) {
-        this.prImei = prImei == null ? null : prImei.trim();
+        this.prImei = prImei;
     }
 
-    public String getPrProvider() {
-        return prProvider;
-    }
-
-    public void setPrProvider(String prProvider) {
-        this.prProvider = prProvider == null ? null : prProvider.trim();
-    }
-
-    public String getPrOs() {
+    public Integer getPrOs() {
         return prOs;
     }
 
-    public void setPrOs(String prOs) {
-        this.prOs = prOs == null ? null : prOs.trim();
+    public void setPrOs(Integer prOs) {
+        this.prOs = prOs;
     }
 
-    public String getPrNet() {
-        return prNet;
+    public String getPrOsVersion() {
+        return prOsVersion;
     }
 
-    public void setPrNet(String prNet) {
-        this.prNet = prNet == null ? null : prNet.trim();
+    public void setPrOsVersion(String prOsVersion) {
+        this.prOsVersion = prOsVersion;
+    }
+
+    public Integer getPrProvider() {
+        return prProvider;
+    }
+
+    public void setPrProvider(Integer prProvider) {
+        this.prProvider = prProvider;
+    }
+
+    public Integer getPrNetType() {
+        return prNetType;
+    }
+
+    public void setPrNetType(Integer prNetType) {
+        this.prNetType = prNetType;
     }
 
     public String getPrHost() {
@@ -76,7 +86,7 @@ public class PingResultEntity {
     }
 
     public void setPrHost(String prHost) {
-        this.prHost = prHost == null ? null : prHost.trim();
+        this.prHost = prHost;
     }
 
     public String getPrNextHost() {
@@ -84,7 +94,7 @@ public class PingResultEntity {
     }
 
     public void setPrNextHost(String prNextHost) {
-        this.prNextHost = prNextHost == null ? null : prNextHost.trim();
+        this.prNextHost = prNextHost;
     }
 
     public String getPrIp() {
@@ -92,7 +102,7 @@ public class PingResultEntity {
     }
 
     public void setPrIp(String prIp) {
-        this.prIp = prIp == null ? null : prIp.trim();
+        this.prIp = prIp;
     }
 
     public Date getPrCreateDate() {

@@ -9,9 +9,7 @@ import com.itsdf07.bean.RespHostsBean;
 import com.itsdf07.entity.PingHostEntity;
 import com.itsdf07.entity.PingResultEntity;
 import com.itsdf07.service.PingService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +32,7 @@ public class PingController {
     @ApiOperation(
             value = "获取ping的目标主机API接口",
             httpMethod = "POST", protocols = "HTTP", produces = "application/json", response = String.class,
-            notes = "Rquest：{\"group\":\"group\"}<br>" +
+            notes = "Rquest：{\"group\":\"TTS\"}<br>" +
                     "Response：{\"code\":200,\"datas\":[{\"addresses\":[{\"prCreateDate\":1574666635000,\"prHost\":\"tts.baidu.com\",\"prIccid\":\"5288412\",\"prId\":1,\"prImei\":\"123456\",\"prIp\":\"115.239.211.61\",\"prNet\":\"4G\",\"prNextHost\":\"tts.n.shifen.com\",\"prOs\":\"8.0\",\"prProvider\":\"Android\"}],\"createTime\":1574411524000,\"group\":\"TTS\",\"host\":\"tts.baidu.com\"},{\"addresses\":[],\"createTime\":1574411524000,\"group\":\"TTS\",\"host\":\"tsn.baidu.com\"}],\"desc\":\"success\"}")
     @PostMapping(value = "/hosts")
     public String getPingHost(
@@ -64,13 +62,13 @@ public class PingController {
     @ApiOperation(
             value = "新增新ping出来的IP或者中转域名的API接口",
             httpMethod = "POST", protocols = "HTTP", produces = "application/json", response = String.class,
-            notes = "Rquest：{\"group\":\"group\"}<br>" +
-                    "Response：{\"datas\":[{\"iccid\":\"8986061910003732056H\",\"imei\":\"860588043009813\",\"provider\":\"Android\",\"os\":\"8.0\",\"netType\":\"4G\",\"host\":\"tts.baidu.com\",\"nextHost\":\"tts.n.shifen.com\",\"ip\":\"115.239.211.61\"}]}")
+            notes = "Rquest：{'datas':[{'host':'tts.baidu.com','iccid':'8986061910003732056H','imei':'860588043009813','ip':'115.239.211.61','netType':4,'nextHost':'tts.n.shifen.com','os':1,'osVersion':'8.0','provider':1}]}" +
+                    "Response：")
     @PostMapping(value = "/addPingReuslt")
     public String addPingResult(
             @ApiParam(name = "body", value = "Client端Json请求串", required = true)
             @RequestBody RequAddPingResultBean requAddPingResultBean) {
-        System.out.println("需要新增的IP信息:datas=" + requAddPingResultBean.toString());
+        System.out.println("需要新增的IP信息:datas=\n" + requAddPingResultBean.toString());
         List<PingResultEntity> pingResultEntities = new ArrayList<>();
         Date createTime = new Date();
         for (RequAddPingResultBean.DatasBean bean :
@@ -81,9 +79,10 @@ public class PingController {
             PingResultEntity pingResultEntity = new PingResultEntity();
             pingResultEntity.setPrIccid(bean.getIccid());
             pingResultEntity.setPrImei(bean.getImei());
-            pingResultEntity.setPrProvider(bean.getProvider());
             pingResultEntity.setPrOs(bean.getOs());
-            pingResultEntity.setPrNet(bean.getNetType());
+            pingResultEntity.setPrOsVersion(bean.getOsVersion());
+            pingResultEntity.setPrProvider(bean.getProvider());
+            pingResultEntity.setPrNetType(bean.getNetType());
             pingResultEntity.setPrHost(bean.getHost());
             pingResultEntity.setPrNextHost(bean.getNextHost());
             pingResultEntity.setPrIp(bean.getIp());

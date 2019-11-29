@@ -29,12 +29,14 @@ public class RequAddPingResultBean {
         private String iccid;
         @ApiModelProperty(name = "imei", value = "860588043009813", notes = "设备表示", dataType = "String", required = true)
         private String imei;
-        @ApiModelProperty(name = "provider", value = "Android", notes = "使用的系统平台", dataType = "String", required = true)
-        private String provider;
-        @ApiModelProperty(name = "os", value = "8.0", notes = "系统版本", dataType = "String", required = true)
-        private String os;
-        @ApiModelProperty(name = "netType", value = "4G", notes = "使用的网络", dataType = "String", required = true)
-        private String netType;
+        @ApiModelProperty(name = "os", value = "1", notes = "系统，如1-Android,2-IOS", dataType = "Int", required = true)
+        private int os;
+        @ApiModelProperty(name = "osVersion", value = "8.0", notes = "系统版本", dataType = "String", required = true)
+        private String osVersion;
+        @ApiModelProperty(name = "provider", value = "1", notes = "运营商:1-移动，2-联通，3-电信", dataType = "Int", required = true)
+        private int provider;
+        @ApiModelProperty(name = "netType", value = "4", notes = "网络:0-未知，1-wifi，2-2G，3-3G，4-4G", dataType = "Int", required = true)
+        private int netType;
         @ApiModelProperty(name = "host", value = "tts.baidu.com", notes = "目标主机", dataType = "String", required = true)
         private String host;
         @ApiModelProperty(name = "nextHost", value = "tts.n.shifen.com", notes = "目标主机", dataType = "String", required = true)
@@ -58,27 +60,35 @@ public class RequAddPingResultBean {
             this.imei = imei;
         }
 
-        public String getProvider() {
-            return provider;
-        }
-
-        public void setProvider(String provider) {
-            this.provider = provider;
-        }
-
-        public String getOs() {
+        public int getOs() {
             return os;
         }
 
-        public void setOs(String os) {
+        public void setOs(int os) {
             this.os = os;
         }
 
-        public String getNetType() {
+        public String getOsVersion() {
+            return osVersion;
+        }
+
+        public void setOsVersion(String osVersion) {
+            this.osVersion = osVersion;
+        }
+
+        public int getProvider() {
+            return provider;
+        }
+
+        public void setProvider(int provider) {
+            this.provider = provider;
+        }
+
+        public int getNetType() {
             return netType;
         }
 
-        public void setNetType(String netType) {
+        public void setNetType(int netType) {
             this.netType = netType;
         }
 
@@ -108,7 +118,7 @@ public class RequAddPingResultBean {
 
         @Override
         public String toString() {
-            return "iccid:" + iccid + ",imei:" + imei + ",provider:" + provider + ",os:" + os + ",netType:" + netType + ",host:" + host + ",nextHost:" + nextHost + ",ip:" + ip;
+            return "iccid:" + iccid + ",imei:" + imei + ",os:" + os + ",osVersion:" + osVersion + ",provider:" + provider + ",netType:" + netType + ",host:" + host + ",nextHost:" + nextHost + ",ip:" + ip;
         }
     }
 
