@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .title("itsdf07系统文档")
                 .description("itsdf07系统对外开放接口文档")
                 .termsOfServiceUrl("https://github.com")
-                .contact(new Contact("itsdf07", "com.itsdf07", "923255742@qq,com"))
+                .contact(new Contact("itsdf07", "https://github.com", "923255742@qq,com"))
                 .version("版本号:1.0")
                 .build();
     }

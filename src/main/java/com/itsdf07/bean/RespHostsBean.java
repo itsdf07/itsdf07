@@ -1,7 +1,5 @@
 package com.itsdf07.bean;
 
-import com.itsdf07.entity.PingHostEntity;
-
 import java.util.List;
 
 /**
@@ -9,7 +7,7 @@ import java.util.List;
  * @Auther: itsdf07
  * @Date: 2019/11/25 10:31
  **/
-public class RespHostsBean extends BaseRespBean{
+public class RespHostsBean extends BaseRespBean {
     private List<PingHostBean> datas;
 
     public List<PingHostBean> getDatas() {
