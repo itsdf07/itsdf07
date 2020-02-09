@@ -33,7 +33,7 @@ public class ThymeleafController {
 
 
     /**
-     * 通用跳转方式
+     * 通用跳转方式(不带参数)
      * http://localhost:8087/*
      * 其中*可代表任何字符串内容
      *
@@ -45,6 +45,8 @@ public class ThymeleafController {
         System.out.println("doForward ---> " + forward);
         return forward;
     }
+
+
 //
 //    /**
 //     * 跳转到用户登录页面:http://localhost:8087/itsdf07/tlogin
