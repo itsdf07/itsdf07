@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--thymeleaf 四种表达式：
+    1.${...}    变量表达式
+    2.@{...}    链接url表达式
+    3.*{...}    选择变量表达式
+    4.#{...}    消息表达式，一般用于国际化，极少使用
+    -->
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            console.log("测试Log");
+        });
+
+
+    </script>
+</head>
+<body>
+这是欢迎界面
+<div class="container">
+    <h1 class="page-header">语法课程</h1>
+</div>
+</body>
+</html>
