@@ -1,9 +1,7 @@
 package com.itsdf07.controller;
 
-import com.itsdf07.bean.BaseRespBean;
 import com.itsdf07.bean.PingHostBean;
 import com.itsdf07.service.PingService;
-import com.itsdf07.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Description: 学习SpringBoot + Thymeleaf 实现前后端分离项目时记录以及沉淀
@@ -23,6 +22,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = {""})
 public class ThymeleafController {
+    @Autowired
+    private PingService pingService;
 
     /**
      * 通用跳转方式(不带参数)
@@ -55,34 +56,32 @@ public class ThymeleafController {
     /**
      * thymeleaf模板中html带参请求
      *
-     * @param name  参数
+     * @param group 参数
      * @param model
      * @return
      */
-    @RequestMapping("thyDatas")
-    public String doDataFormThymeleafHtml(String name, Model model, HttpSession session) {
-        System.out.println("do forward fixed ---> thymeleafHtml.html,name=" + name);
-        session.setAttribute("name", name);
-        BaseRespBean baseRespBean = new BaseRespBean();
-        baseRespBean.setCode(200);
-        baseRespBean.setDesc("请求成功");
-        model.addAttribute("message", "I am " + name + ",I like you!!!");
-        model.addAttribute("respDatas", baseRespBean);
+    @RequestMapping("hosts")
+    public String doDataFormThymeleafHtml(String group, Model model, HttpSession session) {
+        System.out.println("do forward fixed ---> thymeleafHtml.html,group=" + group);
+        List<PingHostBean> hosts = pingService.getHostsByGroup(group);
+        model.addAttribute("group", "I'm in the " + group + " group");
+        model.addAttribute("datas", hosts);
         return "thymeleafHtml2";
     }
 
     /**
      * thymeleaf模板中html占位符带参请求
      *
-     * @param name  参数
-     * @param pwd   参数
+     * @param username 参数
+     * @param group    参数
      * @param model
      * @return
      */
-    @RequestMapping("/{name}/{pwd}/thyDatas")
-    public String doDataFormThymeleafHtmlRest(@PathVariable String name, @PathVariable String pwd, Model model, HttpSession session) {
-        System.out.println("name=" + name + ",pwd=" + pwd);
-        return doDataFormThymeleafHtml(name, model, session);
+    @RequestMapping("/{username}/{group}/hosts")
+    public String doDataFormThymeleafHtmlRest(@PathVariable String username, @PathVariable String group, Model model, HttpSession session) {
+        System.out.println("username=" + username + ",group=" + group);
+        session.setAttribute("username", username);
+        return doDataFormThymeleafHtml(group, model, session);
     }
 
 

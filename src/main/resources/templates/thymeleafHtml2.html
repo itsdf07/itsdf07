@@ -8,17 +8,34 @@
 </head>
 <body>
 <div class="container">
-    <div th:with="msg=${message},datas=${respDatas},name=${session.name}">
-        Session信息：<span th:text="${name}"></span>
+    <div th:with="msg=${group},username=${session.username}">
+        来自数据的信息：<span th:text="'登陆者:' + ${username} + ',请求信息' + ${msg}"></span>
         <br>
-        来自Login者的信息：<span th:text="${msg}"></span>
         <br>
-        来自Login者携带的信息：<span th:text="${datas.getCode() + ':' + datas.getDesc()}"></span>
+        <table class="table-bordered">
+            <thead>
+            <tr>
+                <td>域名</td>
+                <td>分组</td>
+                <td>时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hosts,status:${datas}">
+                <td th:text="${hosts.host}">host</td>
+<!--                <td th:text="${hosts.group}">group</td>-->
+                <td>  <!--  > , < , >= , <= (gt , lt , ge , le)   == , != (eq, ne)   -->
+                    <span th:if="${hosts.group eq 'LOC'}">百度地图组</span>
+                    <span th:if="${hosts.group ne 'LOC'}">百度语音组</span>
+                </td>
+                <td th:text="${hosts.createTime}">时间</td>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
     <br>
-    <div th:object="${respDatas}">
-        来自Login者携带的信息：<span th:text="*{code + ':' + desc}"></span>
-    </div>
+
 </div>
 </body>
 </html>

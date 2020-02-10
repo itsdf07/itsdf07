@@ -23,13 +23,13 @@
 <div class="container">
     <h1 class="page-header">语法课程</h1>
     <div th:with="name='itsdf07'">
-        <a href="" th:href="@{http://localhost:8087/itsdf07/thyDatas(name=${name})}">全路径请求</a>
+        <a href="" th:href="@{http://localhost:8087/itsdf07/hosts(username=${name})}">全路径请求</a>
         <br>
-        <a href="" th:href="@{/thyDatas(name=${name})}">根路径请求</a>
+        <a href="" th:href="@{/hosts(username=${name})}">根路径请求</a>
         <br>
-        <a href="" th:href="@{/thyDatas(name=${name},pwd='123456')}">根路径请求(多参)</a>
+        <a href="" th:href="@{/hosts(username=${name},group='LOC')}">根路径请求(多参)</a>
         <br>
-        <a href="" th:href="@{/{name}/{pwd}/thyDatas(name=${name},pwd='123456')}">占位符根路径请求(多参)</a>
+        <a href="" th:href="@{/{username}/{group}/hosts(username=${name},group='TTS')}">占位符根路径请求(多参)</a>
     </div>
 </div>
 </body>
