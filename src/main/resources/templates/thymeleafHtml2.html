@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>学习课程2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--  偷懒的写法就是用一个通用的js，内部加载的通用的第三方js，然后提供html调用  -->
+    <script type="text/javascript" th:src="@{/js/loader.js}"></script>
+</head>
+<body>
+<div class="container" th:with="msg=${message},datas=${respDatas},name=${session.name}">
+    Session信息：<span th:text="${name}"></span>
+    <br>
+    来自Login者的信息：<span th:text="${msg}"></span>
+    <br>
+    来自Login者携带的信息：<span th:text="${datas.getCode() + ':' + datas.getDesc()}"></span>
+</div>
+</body>
+</html>

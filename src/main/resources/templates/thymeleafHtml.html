@@ -7,7 +7,7 @@
     4.#{...}    消息表达式，一般用于国际化，极少使用
     -->
 <head>
-    <title>hello</title>
+    <title>学习课程</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!--  偷懒的写法就是用一个通用的js，内部加载的通用的第三方js，然后提供html调用  -->
     <script type="text/javascript" th:src="@{/js/loader.js}"></script>
@@ -22,6 +22,15 @@
 <body>
 <div class="container">
     <h1 class="page-header">语法课程</h1>
+    <div th:with="name='itsdf07'">
+        <a href="" th:href="@{http://localhost:8087/itsdf07/thyDatas(name=${name})}">全路径请求</a>
+        <br>
+        <a href="" th:href="@{/thyDatas(name=${name})}">根路径请求</a>
+        <br>
+        <a href="" th:href="@{/thyDatas(name=${name},pwd='123456')}">根路径请求(多参)</a>
+        <br>
+        <a href="" th:href="@{/{name}/{pwd}/thyDatas(name=${name},pwd='123456')}">占位符根路径请求(多参)</a>
+    </div>
 </div>
 </body>
 </html>
