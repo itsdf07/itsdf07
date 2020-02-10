@@ -7,12 +7,18 @@
     <script type="text/javascript" th:src="@{/js/loader.js}"></script>
 </head>
 <body>
-<div class="container" th:with="msg=${message},datas=${respDatas},name=${session.name}">
-    Session信息：<span th:text="${name}"></span>
+<div class="container">
+    <div th:with="msg=${message},datas=${respDatas},name=${session.name}">
+        Session信息：<span th:text="${name}"></span>
+        <br>
+        来自Login者的信息：<span th:text="${msg}"></span>
+        <br>
+        来自Login者携带的信息：<span th:text="${datas.getCode() + ':' + datas.getDesc()}"></span>
+    </div>
     <br>
-    来自Login者的信息：<span th:text="${msg}"></span>
-    <br>
-    来自Login者携带的信息：<span th:text="${datas.getCode() + ':' + datas.getDesc()}"></span>
+    <div th:object="${respDatas}">
+        来自Login者携带的信息：<span th:text="*{code + ':' + desc}"></span>
+    </div>
 </div>
 </body>
 </html>
