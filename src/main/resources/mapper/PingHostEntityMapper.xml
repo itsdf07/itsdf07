@@ -22,6 +22,12 @@
     ph_id, ph_host, ph_group, ph_create_date
   </sql>
 
+    <select id="selectByHost"  resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from t_ping_host
+        where ph_host = #{phHost,jdbcType=VARCHAR}
+    </select>
     <select id="selectByGroup" resultMap="HostPingReuslt" parameterType="java.lang.String">
         select
         *

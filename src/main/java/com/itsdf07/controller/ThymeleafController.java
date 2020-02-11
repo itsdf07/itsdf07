@@ -47,7 +47,7 @@ public class ThymeleafController {
      *
      * @return 欢迎页
      */
-    @RequestMapping(value = {"/", "thymeleafHtml", "thymeleafHtml.html"})//value = {"", "",...}为多参数数据访问方式
+    @RequestMapping(value = {"", "/", "thymeleafHtml", "thymeleafHtml.html"})//value = {"", "",...}为多参数数据访问方式
     public String doForward2ThymeleafHtml() {
         System.out.println("do forward fixed ---> thymeleafHtml.html");
         return "thymeleafHtml";

@@ -12,6 +12,14 @@ import java.util.List;
 @Component
 public interface PingHostEntityMapper {
     /**
+     * 查询域名
+     *
+     * @param host 目标主机
+     * @return
+     */
+    PingHostEntity selectByHost(String host);
+
+    /**
      * 根据目标主机的归类，查询对应主机
      * 如果归类为空，这查找全部
      *

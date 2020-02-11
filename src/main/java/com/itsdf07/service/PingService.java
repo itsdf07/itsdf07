@@ -5,9 +5,11 @@ import com.itsdf07.entity.PingHostEntity;
 import com.itsdf07.entity.PingResultEntity;
 import com.itsdf07.mapper.PingHostEntityMapper;
 import com.itsdf07.mapper.PingResultEntityMapper;
+import com.itsdf07.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +42,26 @@ public class PingService {
      */
     public int insertBatch2PingResults(List<PingResultEntity> pingResults) {
         return pingResultEntityMapper.insertBatch(pingResults);
+    }
+
+    /**
+     * 插入数据
+     *
+     * @param host  域名/IP
+     * @param group 分组
+     * @return
+     */
+    public int insertHost(String host, String group) {
+        PingHostEntity hostFormDB = pingHostEntityMapper.selectByHost(host);
+        if (null != hostFormDB) {
+            return hostFormDB.getPhId();
+        }
+        PingHostEntity pingHostEntity = new PingHostEntity();
+        pingHostEntity.setPhHost(host);
+        pingHostEntity.setPhGroup(group);
+
+        pingHostEntity.setPhCreateDate(new Date());
+        return pingHostEntityMapper.insert(pingHostEntity);
     }
 
 }

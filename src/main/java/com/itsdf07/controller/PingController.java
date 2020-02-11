@@ -1,9 +1,7 @@
 package com.itsdf07.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.itsdf07.bean.*;
-import com.itsdf07.entity.PingHostEntity;
 import com.itsdf07.entity.PingResultEntity;
 import com.itsdf07.service.PingService;
 import com.itsdf07.utils.StringUtils;
@@ -28,6 +26,36 @@ import java.util.List;
 public class PingController {
     @Autowired
     private PingService pingService;
+
+
+    @ApiOperation(
+            value = "新增目标主机",
+            httpMethod = "POST",
+            protocols = "HTTP",
+            produces = "application/json",
+            response = String.class,
+            notes = "增加目标主机")
+    @RequestMapping(value = "/addhost", method = RequestMethod.POST)
+    public String addHost(
+            @ApiParam(name = "body", value = "Json请求串", required = true)
+            @RequestBody RequAddHostsBean dataBean) {
+        System.out.println("新增的目标主机" + dataBean.toString());
+        List<PingResultEntity> pingResultEntities = new ArrayList<>();
+        //TODO 待优化：如果已经存在，则相同数据不重复插入
+        int cnt = pingService.insertHost(dataBean.getHost(), dataBean.getGroup());
+        System.out.println("插入数量:cnt=" + cnt);
+        BaseRespBean baseRespBean = new BaseRespBean();
+        if (cnt > 0) {
+            baseRespBean.setCode(400);
+            baseRespBean.setDesc("新增" + dataBean.getHost() + "数据失败，可能已经存在");
+        } else {
+            baseRespBean.setCode(200);
+            baseRespBean.setDesc("成功新增了" + dataBean.getHost() + "数据");
+        }
+
+        return JSONObject.toJSONString(baseRespBean);
+    }
+
 
     @ApiOperation(
             value = "获取分类目标主机",
@@ -101,4 +129,5 @@ public class PingController {
         baseRespBean.setDesc("成功新增了" + cnt + "数据");
         return JSONObject.toJSONString(baseRespBean);
     }
+
 }
