@@ -46,11 +46,11 @@ public class PingController {
         System.out.println("插入数量:cnt=" + cnt);
         BaseRespBean baseRespBean = new BaseRespBean();
         if (cnt > 0) {
-            baseRespBean.setCode(400);
-            baseRespBean.setDesc("新增" + dataBean.getHost() + "数据失败，可能已经存在");
-        } else {
             baseRespBean.setCode(200);
             baseRespBean.setDesc("成功新增了" + dataBean.getHost() + "数据");
+        } else {
+            baseRespBean.setCode(400);
+            baseRespBean.setDesc("新增" + dataBean.getHost() + "数据失败，可能已经存在");
         }
 
         return JSONObject.toJSONString(baseRespBean);

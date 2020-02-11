@@ -49,12 +49,12 @@ public class PingService {
      *
      * @param host  域名/IP
      * @param group 分组
-     * @return
+     * @return 返回插入数量
      */
     public int insertHost(String host, String group) {
         PingHostEntity hostFormDB = pingHostEntityMapper.selectByHost(host);
         if (null != hostFormDB) {
-            return hostFormDB.getPhId();
+            return 0;
         }
         PingHostEntity pingHostEntity = new PingHostEntity();
         pingHostEntity.setPhHost(host);
