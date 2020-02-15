@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作者信息</title>
+</head>
+<body>
+<div class="container">
+    <h3 class="page-header">作者信息</h3>
+    <div th:object="${author }">
+        姓名：<span th:text="*{name}"></span><br>
+        昵称：<span th:text="*{nick}"></span><br>
+        性别：<span th:text="*{sex}"></span><br>
+        邮箱：<span th:text="*{eMail}"></span><br>
+        QQ：<span th:text="*{qq}"></span><br>
+        博客：<span th:text="*{blogs}"></span><br>
+        Github：<span th:text="*{github}"></span><br>
+        <br>
+    </div>
+    <br>
+
+</div>
+</body>
+</html>

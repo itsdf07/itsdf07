@@ -1,6 +1,8 @@
 package com.itsdf07.controller;
 
+import com.itsdf07.entity.AuthorEntity;
 import com.itsdf07.bean.PingHostBean;
+import com.itsdf07.mapper.AuthorEntityMapper;
 import com.itsdf07.service.PingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,9 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = {""})
-public class ThymeleafController {
+public class FilterController {
+    @Autowired
+    private AuthorEntityMapper authorEntityMapper;
     @Autowired
     private PingService pingService;
 
@@ -40,6 +44,24 @@ public class ThymeleafController {
     }
 
     /**
+     * 访问作者页
+     * 1:http://localhost:8087/itsdf07/
+     * 2:http://localhost:8087/itsdf07/author
+     * 3:http://localhost:8087/itsdf07/author.html
+     *
+     * @return 作者页
+     */
+    @RequestMapping(value = {"", "/", "author", "author.html"})
+    public String doForward2Author(Model model) {
+        AuthorEntity authorEntity = authorEntityMapper.getAuthor();
+        if (null == authorEntity || authorEntity.getIsShow() == 0) {
+            return "thymeleafHtml";
+        }
+        model.addAttribute("author", authorEntity);
+        return "author";
+    }
+
+    /**
      * Thymeleaf学习页，访问地址如下(多种访问方式)
      * 1:http://localhost:8087/itsdf07/
      * 2:http://localhost:8087/itsdf07/thymeleafHtml
@@ -47,7 +69,7 @@ public class ThymeleafController {
      *
      * @return 欢迎页
      */
-    @RequestMapping(value = {"", "/", "thymeleafHtml", "thymeleafHtml.html"})//value = {"", "",...}为多参数数据访问方式
+    @RequestMapping(value = {"thymeleafHtml", "thymeleafHtml.html"})//value = {"", "",...}为多参数数据访问方式
     public String doForward2ThymeleafHtml() {
         System.out.println("do forward fixed ---> thymeleafHtml.html");
         return "thymeleafHtml";

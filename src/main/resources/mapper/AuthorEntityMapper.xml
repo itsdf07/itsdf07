@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itsdf07.mapper.AuthorEntityMapper">
+    <resultMap id="BaseResultMap" type="com.itsdf07.entity.AuthorEntity">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="nick" property="nick" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="e_mail" property="eMail" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="blogs" property="blogs" jdbcType="VARCHAR"/>
+        <result column="github" property="github" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getAuthor" resultMap="BaseResultMap" parameterType="com.itsdf07.entity.AuthorEntity">
+        select
+       *
+        from author
+    </select>
+</mapper>
