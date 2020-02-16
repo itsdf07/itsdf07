@@ -1,21 +1,24 @@
 package com.itsdf07.controller;
 
+import com.itsdf07.author.VersionEntity;
 import com.itsdf07.entity.AuthorEntity;
 import com.itsdf07.bean.PingHostBean;
 import com.itsdf07.mapper.AuthorEntityMapper;
 import com.itsdf07.service.PingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
- * @Description: 学习SpringBoot + Thymeleaf 实现前后端分离项目时记录以及沉淀
+ * @Description: 页面跳转过滤器
  * @Author itsdf07
  * @E-Mail 923255742@qq.com
  * @Github https://github.com/itsdf07
@@ -28,6 +31,14 @@ public class FilterController {
     private AuthorEntityMapper authorEntityMapper;
     @Autowired
     private PingService pingService;
+
+    @Value("${version}")
+    private String version;
+    @Value("${versionInfo}")
+    private String versionInfo;
+    //    @Resource
+    @Autowired
+    private VersionEntity versionEntity;
 
     /**
      * 通用跳转方式(不带参数)
@@ -58,6 +69,9 @@ public class FilterController {
             return "thymeleafHtml";
         }
         model.addAttribute("author", authorEntity);
+        model.addAttribute("version", versionEntity);
+        model.addAttribute("os", version);
+        System.out.println("从yml中注解方式取得version:" + version + ",versionInfo" + versionInfo);
         return "author";
     }
 

@@ -1,16 +1,14 @@
+#不同环境切换配置之：开发环境
 server:
-  port: 8087
   servlet:
     context-path: /itsdf07
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/itsdf07_db?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password:
-    driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    active: dev #快速切换不同环境的配置
 
-  #  ###ThymeLeaf配置
+
+#  ###ThymeLeaf配置
 thymeleaf:
   ##配置模板引擎:是让controller层到templates文件夹寻找xx.html(src/main/resources/templates)
   prefix: classpath:/templates/ #配置前缀，可以不配置，因为静态页面存放的默认位置就是该templates
@@ -24,3 +22,9 @@ mybatis:
   type-aliases-package: com.itsdf07.entity  # 注意：对应实体类的路径
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 配置控制台打印sql查询语句并附带查询结果数据
+
+version: 1.0.0
+flag: ${versionFlag} #单个属性注入
+versionInfo: ${flag},${version} #组合属性注入
+version.version: 当前版本号：1.0.0 #实体类封装注入
+version.flag: 当前版本：${versionFlag} #实体类封装注入
