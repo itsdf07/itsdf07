@@ -52,3 +52,18 @@ function dateFtt(fmt, date) {
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+/**
+ * 判断字符串为空
+ * @param content
+ * @returns {boolean}
+ */
+function isEmpty(content) {
+    if (typeof content == "undefined" || content == null || content == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
