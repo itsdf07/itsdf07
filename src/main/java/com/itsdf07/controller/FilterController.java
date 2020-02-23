@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -133,16 +133,17 @@ public class FilterController {
 //        return "thymeleafHtml";
 //    }
 //
-//    /**
-//     * 跳转到用户登录页面:http://localhost:8087/itsdf07/tlogin
-//     *
-//     * @return 登录页面
-//     */
-//    @RequestMapping(value = "/tlogin", method = RequestMethod.GET)
-//    public String onLogin(Model model) {
-//        model.addAttribute("msg", "登陆系统UI实例");
-//        return "login";
-//    }
+
+    /**
+     * 用户登录接口
+     *
+     * @return 登录之后的跳转页面
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String onLogin(HttpServletRequest request) {
+        System.out.println("userName:" + request.getParameter("userName"));
+        return "login";
+    }
 
 
 }

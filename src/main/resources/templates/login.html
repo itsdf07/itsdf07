@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登陆</title>
+    <!--  偷懒的写法就是用一个通用的js，内部加载的通用的第三方js，然后提供html调用  -->
+    <script type="text/javascript" th:src="@{/js/loader.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <h2 class="logo-name">IT</h2>
+        </div>
+        <!--<h3>Welcome to XXX</h3>-->
+        <p>
+            itsdf07后台管理
+        </p>
+        <!--        <p>Login in. To see it in action.</p>-->
+        <form class="m-t" role="form" action="login" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入账户" name="userName" required=""/>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请输入密码" name="password" required=""/>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登陆</button>
+            <a th:href="sss" href="#"><small>忘记密码？</small></a>
+            <p class="text-muted text-center">
+                <small>没有帐户?</small>
+            </p>
+            <a class="btn btn-sm btn-white btn-block" th:href="sss" href="register.html">创建账户</a>
+        </form>
+        <p class="m-t">
+            <small>基于Thymeleaf + Bootstrap 3 &copy; 2020</small>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
