@@ -1,4 +1,4 @@
-package com.itsdf07.service;
+package com.itsdf07.service.impl;
 
 import com.itsdf07.bean.PingHostBean;
 import com.itsdf07.entity.PingHostEntity;

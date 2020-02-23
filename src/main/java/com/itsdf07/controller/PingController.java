@@ -3,7 +3,7 @@ package com.itsdf07.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.itsdf07.bean.*;
 import com.itsdf07.entity.PingResultEntity;
-import com.itsdf07.service.PingService;
+import com.itsdf07.service.impl.PingService;
 import com.itsdf07.utils.StringUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
