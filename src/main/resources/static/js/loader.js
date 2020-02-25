@@ -27,6 +27,7 @@ document.write('<script src="' + getRootPath() + '/js/jquery-3.3.1.min.js"></scr
 //引入bootstrap
 document.write('<script src="' + getRootPath() + '/js/bootstrap.min.js"></script>');
 document.write('<link rel="stylesheet" href="' + getRootPath() + '/css/bootstrap.min.css"/>');
+document.write('<link rel="stylesheet" href="' + getRootPath() + '/css/style.css"/>');
 
 
 /**
