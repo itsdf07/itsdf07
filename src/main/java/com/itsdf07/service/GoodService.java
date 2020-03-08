@@ -60,4 +60,5 @@ public interface GoodService {
      */
     int addGood(GoodEntity goodEntity);
 
+    int update(GoodEntity goodEntity);
 }

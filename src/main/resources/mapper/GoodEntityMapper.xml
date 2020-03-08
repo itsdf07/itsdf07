@@ -6,11 +6,12 @@
         <result column="good_name" property="goodName" jdbcType="VARCHAR"/>
         <result column="good_sku" property="goodSku" jdbcType="VARCHAR"/>
         <result column="good_picture" property="goodPicture" jdbcType="VARCHAR"/>
+        <result column="good_count" property="goodCount" jdbcType="INTEGER"/>
         <result column="good_mark" property="goodMark" jdbcType="VARCHAR"/>
         <result column="good_create_dtime" property="goodCreateDtime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    good_id, good_name, good_sku, good_picture, good_mark, good_create_dtime
+    good_id, good_name, good_sku, good_picture, good_count, good_mark, good_create_dtime
   </sql>
     <select id="selectGood" parameterType="java.lang.String" resultMap="BaseResultMap">
         select *
@@ -46,10 +47,10 @@
   </delete>
     <insert id="insert" parameterType="com.itsdf07.entity.GoodEntity">
     insert into goods (good_id, good_name, good_sku, 
-      good_picture, good_mark, good_create_dtime
+      good_picture, good_count, good_mark, good_create_dtime
       )
     values (#{goodId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, #{goodSku,jdbcType=VARCHAR}, 
-      #{goodPicture,jdbcType=VARCHAR}, #{goodMark,jdbcType=VARCHAR}, #{goodCreateDtime,jdbcType=TIMESTAMP}
+      #{goodPicture,jdbcType=VARCHAR}, #{goodCount,jdbcType=INTEGER}, #{goodMark,jdbcType=VARCHAR}, #{goodCreateDtime,jdbcType=TIMESTAMP}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.itsdf07.entity.GoodEntity">
@@ -66,6 +67,9 @@
             </if>
             <if test="goodPicture != null">
                 good_picture,
+            </if>
+            <if test="goodCount != null">
+                good_count,
             </if>
             <if test="goodMark != null">
                 good_mark,
@@ -107,6 +111,9 @@
             <if test="goodPicture != null">
                 good_picture = #{goodPicture,jdbcType=VARCHAR},
             </if>
+            <if test="goodCount != null">
+                good_count = #{goodCount,jdbcType=INTEGER},
+            </if>
             <if test="goodMark != null">
                 good_mark = #{goodMark,jdbcType=VARCHAR},
             </if>
@@ -120,7 +127,8 @@
     update goods
     set good_name = #{goodName,jdbcType=VARCHAR},
       good_sku = #{goodSku,jdbcType=VARCHAR},
-      good_picture = #{goodPicture,jdbcType=VARCHAR},
+      good_picture = #{goodPicture,jdbcType=INTEGER},
+      good_count = #{goodCount,jdbcType=VARCHAR},
       good_mark = #{goodMark,jdbcType=VARCHAR},
       good_create_dtime = #{goodCreateDtime,jdbcType=TIMESTAMP}
     where good_id = #{goodId,jdbcType=INTEGER}

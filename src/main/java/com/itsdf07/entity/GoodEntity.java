@@ -11,6 +11,8 @@ public class GoodEntity {
 
     private String goodPicture;
 
+    private Integer goodCount;
+
     private String goodMark;
 
     private Date goodCreateDtime;
@@ -45,6 +47,14 @@ public class GoodEntity {
 
     public void setGoodPicture(String goodPicture) {
         this.goodPicture = goodPicture == null ? null : goodPicture.trim();
+    }
+
+    public Integer getGoodCount() {
+        return goodCount;
+    }
+
+    public void setGoodCount(Integer goodCount) {
+        this.goodCount = goodCount;
     }
 
     public String getGoodMark() {

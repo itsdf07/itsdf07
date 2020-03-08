@@ -54,6 +54,7 @@ public class GoodController {
         GoodEntity goodEntity = new GoodEntity();
         goodEntity.setGoodName(data2Bean.getGoodName());
         goodEntity.setGoodSku(data2Bean.getGoodSku());
+        goodEntity.setGoodCount(0);
         goodEntity.setGoodMark(data2Bean.getMark());
         goodEntity.setGoodPicture("暂无图片");
         goodEntity.setGoodCreateDtime(new Date());
@@ -62,5 +63,24 @@ public class GoodController {
         baseRespBean.setCode(result > 0 ? 200 : 500);
         baseRespBean.setDesc(result > 0 ? "添加成功" : "添加失败");
         return JSONObject.toJSONString(baseRespBean);
+    }
+
+    @PostMapping(value = "/addUpdate")
+    public String addUpdate(@RequestBody RequAddGood data2Bean) {
+        System.out.println("addUpdate->" + data2Bean.toString());
+        GoodEntity goodEntity = goodService.findGoodBySku(data2Bean.getGoodSku());
+        BaseRespBean baseRespBean = new BaseRespBean();
+        if (null == goodEntity) {
+            baseRespBean.setCode(500);
+            baseRespBean.setDesc("更新失败");
+            return JSONObject.toJSONString(baseRespBean);
+        } else {
+            goodEntity.setGoodCount(goodEntity.getGoodCount() + data2Bean.getCount());
+            int result = goodService.update(goodEntity);
+            baseRespBean.setCode(result > 0 ? 200 : 500);
+            baseRespBean.setDesc(result > 0 ? "更新成功" : "更新失败");
+            return JSONObject.toJSONString(baseRespBean);
+        }
+
     }
 }

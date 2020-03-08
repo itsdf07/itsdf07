@@ -68,6 +68,11 @@ public class GoodServiceImpl implements GoodService {
         return goodEntityMapper.insert(goodEntity);
     }
 
+    @Override
+    public int update(GoodEntity goodEntity) {
+        return goodEntityMapper.updateByPrimaryKeySelective(goodEntity);
+    }
+
 //
 //    /**
 //     * 添加商品

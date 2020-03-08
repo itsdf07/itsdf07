@@ -11,6 +11,7 @@ public class RequAddGood {
     private String goodName;
     private String goodSku;
     private String mark;
+    private int count;
 
     public String getGoodName() {
         return goodName;
@@ -36,8 +37,16 @@ public class RequAddGood {
         this.mark = mark;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
-        return "goodName:" + goodName + ",goodSku:" + goodSku + ",mark:" + mark;
+        return "goodName:" + goodName + ",goodSku:" + goodSku + ",count:" + count + ",mark:" + mark;
     }
 }
