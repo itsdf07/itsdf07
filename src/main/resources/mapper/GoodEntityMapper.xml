@@ -17,8 +17,9 @@
         select *
         from goods
         <where>
+            1=1
             <if test="goodName != null">
-                good_name = #{goodName,jdbcType=VARCHAR}
+                and good_name = #{goodName,jdbcType=VARCHAR}
             </if>
             <if test="goodSku != null">
                 and good_sku = #{goodSku,jdbcType=VARCHAR}

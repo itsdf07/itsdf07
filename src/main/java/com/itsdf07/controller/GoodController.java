@@ -8,7 +8,6 @@ import com.itsdf07.bean.RespGoodsBean;
 import com.itsdf07.entity.GoodEntity;
 import com.itsdf07.service.GoodService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
